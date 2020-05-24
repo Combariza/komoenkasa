@@ -1,5 +1,8 @@
 <template>
     <form>
+        <div>
+            <p>ingresa como: <br> {{currentUser}} </p>
+        </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="ingrese su email">
@@ -16,6 +19,15 @@
 
 <script>
 import Firebase from 'firebase'
+import { store } from '../store/store.js'
+
+Firebase.auth().onAuthStateChanged(function(user) {
+    if(user) {
+        store.dispatch('setUser', user)
+    }else {
+        store.dispatch('setUser', null)
+    } 
+})
 
 export default {
     methods: {
@@ -36,8 +48,8 @@ export default {
                 }
             })
                 
-            }
-        },
+            },
+        
         signOut() {
             Firebase.auth().signOut().then(function() {
                 alert('Cerrar sesion');
@@ -45,5 +57,11 @@ export default {
                 alert(error)
             })
         }
+    },
+    computed: {
+        currentUser () {
+            return this.$store.getters.currentUser
+        }
     }
+}
 </script>

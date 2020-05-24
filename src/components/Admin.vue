@@ -62,18 +62,18 @@
 <script>
 import NuevaReceta from './NuevaReceta.vue'
 import Login from './Login.vue'
+import { mapGetters } from 'vuex'
+
 export default {
     components: {
         ppNuevaReceta: NuevaReceta,
         ppLogin: Login
     },
      computed: {
-        getMenuItems() {
-            return this.$store.state.menuItems
-        },
-        numberOfOrders() {
-            return this.$store.getters.numberOfOrders
-        }
+        ...mapGetters ([
+            'numberOfOrders',
+            'getMenuItems'
+        ])
     },
     
     
