@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as actions from './actions'
 
 
 Vue.use(Vuex)
@@ -102,9 +103,5 @@ export const store = new Vuex.Store({
         }
     } 
     },
-    actions: {
-        setUser({ commit }, user) {
-            commit('userStatus', user)        
-        }
-    }        
+   actions        
 })
