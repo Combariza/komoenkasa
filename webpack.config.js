@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+//console.log(path.resolve(__dirname, './dist'))
 
 module.exports = {
   entry: './src/main.js',
@@ -16,7 +17,14 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },      {
+      },
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [path.resolve(__dirname, './src')]
+      },
+        {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
